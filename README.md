@@ -45,3 +45,19 @@ const typeDefs = gql`
 
 `
 ```
+
+**Query, Mutation 사용구분**
+
+User가 데이터를 받아오게 하고싶다면 *Query* 안에 있어야하고
+User가 데이터를 보내서 업데이트, 삭제를 하려면 *Mutation*이 되어야 한다.
+
+```javascript
+    type Query{
+        allTweets: [Tweet]
+        tweet(id:ID): Tweet
+    }
+    type Mutation{
+        postTweet(text:String, userId: ID): Tweet
+        deleteTweet(id:ID): Boolean
+    }
+```
