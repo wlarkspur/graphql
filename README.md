@@ -61,3 +61,26 @@ User가 데이터를 보내서 업데이트, 삭제를 하려면 *Mutation*이 �
         deleteTweet(id:ID): Boolean
     }
 ```
+
+**!의 활용**
+
+```javascript
+type Query{
+        allTweets: [Tweet!]!
+        tweet(id:ID!): Tweet
+    }
+```
+!는 어떤 값이 required 라고 지정해주는 것을 의미한다.
+tweet(id:ID!) 처럼 argumnent를 required로 설정할 수 있고
+allTweets: [Tweet!]! 의 경우엔 []!는 allTweets이 반드시 [];list 값을 가져야 하며,
+[]안의 값은 언제나 [Tweet!] 값이어야 한다는 의미다. DB에 Tweet이 없을 경우 (서버가 막 시작했거나)값이 없는 경우가 가능하지만 null 값이 나올순 없다.
+이렇게 nullable, non-nullable은 매우 중요하다. 
+"tweet(id:ID!): Tweet" 에서 id:ID!는 값이 없을 수 있다. 그래서 출력값 Tweet은 nullable값으로 표현된다. 
+
+**resolver 함수 args의 순서**
+```javascript
+ex, IQOS(root, args)
+```
+
+* DB를 mutate한다면, 함수를 Mutation에 작성하고
+  그저 data를 fetching하는거라면 Query에 작성한다.
